@@ -1,4 +1,4 @@
-package com.example.mapapp   // <-- cámbialo por tu paquete
+package com.example.dbapp
 
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
