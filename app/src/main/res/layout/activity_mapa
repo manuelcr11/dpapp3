@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="17dp">
 
         <EditText
             android:id="@+id/txtLat"
@@ -23,7 +23,7 @@
 
         <EditText
             android:id="@+id/txtPlace"
-            android:hint="Nombre del lugar (opcional)"
+            android:hint="Nombre del lugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
