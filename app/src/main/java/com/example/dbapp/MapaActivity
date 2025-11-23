@@ -1,17 +1,18 @@
 package com.example.dbapp
 
 import android.location.Geocoder
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.io.IOException
 import java.util.Locale
 
 class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -23,22 +24,25 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
 
+        // Inicializar geocoder
         geocoder = Geocoder(this, Locale.getDefault())
 
+        // Inicializar mapa
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        // Views del formulario
         val txtLat = findViewById<EditText>(R.id.txtLat)
         val txtLon = findViewById<EditText>(R.id.txtLon)
         val txtPlace = findViewById<EditText>(R.id.txtPlace)
         val btnBuscar = findViewById<Button>(R.id.btnBuscar)
 
+        // Evento del botón
         btnBuscar.setOnClickListener {
-
-            val place = txtPlace.text.toString()
-            val lat = txtLat.text.toString()
-            val lon = txtLon.text.toString()
+            val place = txtPlace.text.toString().trim()
+            val lat = txtLat.text.toString().trim()
+            val lon = txtLon.text.toString().trim()
 
             when {
                 place.isNotEmpty() -> buscarPorNombre(place)
@@ -56,32 +60,48 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback {
         val location = LatLng(lat, lon)
         mostrarEnMapa(location)
 
-        val addresses = geocoder.getFromLocation(lat, lon, 1)
+        try {
+            val addresses = geocoder.getFromLocation(lat, lon, 1)
 
-        if (!addresses.isNullOrEmpty()) {
-            val dir = addresses[0].getAddressLine(0)
-            Toast.makeText(this, dir, Toast.LENGTH_LONG).show()
+            if (!addresses.isNullOrEmpty()) {
+                val dir = addresses[0].getAddressLine(0)
+                Toast.makeText(this, dir, Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "No se encontró dirección", Toast.LENGTH_SHORT).show()
+            }
+
+        } catch (e: IOException) {
+            Toast.makeText(this, "Error obteniendo dirección", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun buscarPorNombre(nombre: String) {
-        val resultados = geocoder.getFromLocationName(nombre, 1)
+        try {
+            val resultados = geocoder.getFromLocationName(nombre, 1)
 
-        if (!resultados.isNullOrEmpty()) {
-            val lat = resultados[0].latitude
-            val lon = resultados[0].longitude
-            val direccion = resultados[0].getAddressLine(0)
+            if (!resultados.isNullOrEmpty()) {
+                val lat = resultados[0].latitude
+                val lon = resultados[0].longitude
+                val direccion = resultados[0].getAddressLine(0)
+                val location = LatLng(lat, lon)
 
-            val location = LatLng(lat, lon)
-            mostrarEnMapa(location)
+                mostrarEnMapa(location)
+                Toast.makeText(this, direccion, Toast.LENGTH_LONG).show()
 
-            Toast.makeText(this, direccion, Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "No se encontró el lugar", Toast.LENGTH_SHORT).show()
+            }
+
+        } catch (e: IOException) {
+            Toast.makeText(this, "Error al buscar la ubicación", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun mostrarEnMapa(location: LatLng) {
-        gMap.clear()
-        gMap.addMarker(MarkerOptions().position(location).title("Ubicación encontrada"))
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 17f))
+        gMap.apply {
+            clear()
+            addMarker(MarkerOptions().position(location).title("Ubicación encontrada"))
+            moveCamera(CameraUpdateFactory.newLatLngZoom(location, 17f))
+        }
     }
 }
