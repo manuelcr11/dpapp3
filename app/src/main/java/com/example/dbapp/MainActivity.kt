@@ -1,5 +1,6 @@
 package com.example.dbapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var txtMarca: EditText
     private lateinit var txtPlaca: EditText
     private lateinit var lista: TextView
-
     private lateinit var dao: VehiculoDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnMostrar).setOnClickListener { mostrar() }
         findViewById<Button>(R.id.btnActualizar).setOnClickListener { actualizar() }
         findViewById<Button>(R.id.btnEliminar).setOnClickListener { eliminar() }
+
+        findViewById<Button>(R.id.btnMapa).setOnClickListener {
+            startActivity(Intent(this, MapaActivity::class.java))
+        }
     }
 
     private fun agregar() {
@@ -76,13 +80,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun eliminar() {
         val idText = txtId.text.toString()
-
-        // Validar que no esté vacío
         if (idText.isEmpty()) {
             Toast.makeText(this, "Ingresa el ID a eliminar", Toast.LENGTH_SHORT).show()
             return
         }
-
         try {
             val id = idText.toInt()
             val exito = dao.eliminar(id)
@@ -92,5 +93,4 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "ID inválido", Toast.LENGTH_SHORT).show()
         }
     }
-
 }
