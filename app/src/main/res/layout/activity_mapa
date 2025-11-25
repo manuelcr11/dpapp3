@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="17dp">
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/txtPlace"
+            android:hint="Buscar por nombre (Ciudad, lugar...)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/txtLat"
             android:hint="Latitud"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/txtLon"
             android:hint="Longitud"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/txtPlace"
-            android:hint="Nombre del lugar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
 
         <Button
-            android:id="@+id/btnBuscar"
-            android:text="Buscar Ubicación"
+            android:id="@+id/bt́nBuscar"
+            android:text="Buscar ubicación"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/btnBuscar"/>
-</RelativeLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>
