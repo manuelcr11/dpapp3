@@ -4,15 +4,15 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import com.example.dbapp.db.UniversidadDBHelper
-import com.example.dbapp.model.Alumno
 import com.example.dbapp.model.Automovil
 import com.example.dbapp.model.Motocicleta
+import com.example.dbapp.model.Vehiculo
 
-class VehiculoDAO(context: Context) : ICrud<Alumno> {
+class VehiculoDAO(context: Context) : ICrud<Vehiculo> {
 
     private val dbHelper = UniversidadDBHelper(context)
 
-    override fun insertar(obj: Alumno): Boolean {
+    override fun insertar(obj: Vehiculo): Boolean {
         val db = dbHelper.writableDatabase
         val valores = ContentValues().apply {
             put("alumno", obj.nombre)
@@ -26,7 +26,7 @@ class VehiculoDAO(context: Context) : ICrud<Alumno> {
         return resultado != -1L
     }
 
-    override fun actualizar(obj: Alumno): Boolean {
+    override fun actualizar(obj: Vehiculo): Boolean {
         val db = dbHelper.writableDatabase
         val valores = ContentValues().apply {
             put("alumno", obj.nombre)
@@ -35,7 +35,12 @@ class VehiculoDAO(context: Context) : ICrud<Alumno> {
             put("marca", obj.marca)
             put("placa", obj.placa)
         }
-        val resultado = db.update("vehiculo", valores, "id = ?", arrayOf(obj.id.toString()))
+        val resultado = db.update(
+            "vehiculo",
+            valores,
+            "id = ?",
+            arrayOf(obj.id.toString())
+        )
         db.close()
         return resultado > 0
     }
@@ -47,34 +52,28 @@ class VehiculoDAO(context: Context) : ICrud<Alumno> {
         return resultado > 0
     }
 
-    override fun obtenerTodos(): ArrayList<Alumno> {
-        val lista = ArrayList<Alumno>()
+    override fun obtenerTodos(): ArrayList<Vehiculo> {
+        val lista = ArrayList<Vehiculo>()
         val db = dbHelper.readableDatabase
         val cursor: Cursor = db.rawQuery("SELECT * FROM vehiculo", null)
 
         if (cursor.moveToFirst()) {
             do {
+                val id = cursor.getInt(0)
+                val nombre = cursor.getString(1)
+                val matricula = cursor.getString(2)
                 val tipo = cursor.getString(3)
-                val alumno = if (tipo.lowercase() == "automovil") {
-                    Automovil(
-                        id = cursor.getInt(0),
-                        nombre = cursor.getString(1),
-                        matricula = cursor.getString(2),
-                        tipoVehiculo = tipo,
-                        marca = cursor.getString(4),
-                        placa = cursor.getString(5)
-                    )
-                } else {
-                    Motocicleta(
-                        id = cursor.getInt(0),
-                        nombre = cursor.getString(1),
-                        matricula = cursor.getString(2),
-                        tipoVehiculo = tipo,
-                        marca = cursor.getString(4),
-                        placa = cursor.getString(5)
-                    )
+                val marca = cursor.getString(4)
+                val placa = cursor.getString(5)
+
+                val vehiculo = when (tipo.lowercase()) {
+                    "automovil" -> Automovil(id, nombre, matricula, tipo, marca, placa)
+                    "motocicleta" -> Motocicleta(id, nombre, matricula, tipo, marca, placa)
+                    else -> null
                 }
-                lista.add(alumno)
+
+                vehiculo?.let { lista.add(it) }
+
             } while (cursor.moveToNext())
         }
 
@@ -83,3 +82,4 @@ class VehiculoDAO(context: Context) : ICrud<Alumno> {
         return lista
     }
 }
+
