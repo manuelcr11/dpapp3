@@ -5,25 +5,31 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class UniversidadDBHelper(context: Context) :
-    SQLiteOpenHelper(context, "UniversidadDB", null, 1) {
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        db?.execSQL(
+    companion object {
+        const val DATABASE_NAME = "UniversidadDB"
+        const val DATABASE_VERSION = 2   // Súbelo cuando hagas cambios
+    }
+
+    override fun onCreate(db: SQLiteDatabase) {
+        db.execSQL(
             """
             CREATE TABLE vehiculo (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                alumno TEXT,
-                matricula TEXT,
-                tipo TEXT,
-                marca TEXT,
-                placa TEXT
-            )
+                alumno TEXT NOT NULL,
+                matricula TEXT NOT NULL,
+                tipo TEXT NOT NULL,
+                marca TEXT NOT NULL,
+                placa TEXT NOT NULL
+            );
             """
         )
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.execSQL("DROP TABLE IF EXISTS vehiculo")
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS vehiculo")
         onCreate(db)
     }
 }
+
