@@ -1,0 +1,70 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Matrícula -->
+    <EditText
+        android:id="@+id/etMatricula"
+        android:hint="Matrícula (ID)"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Nombre -->
+    <EditText
+        android:id="@+id/etNombre"
+        android:hint="Nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Apellido Paterno -->
+    <EditText
+        android:id="@+id/etApellidoPaterno"
+        android:hint="Apellido Paterno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Apellido Materno -->
+    <EditText
+        android:id="@+id/etApellidoMaterno"
+        android:hint="Apellido Materno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Modelo del vehículo -->
+    <EditText
+        android:id="@+id/etModelo"
+        android:hint="Modelo del vehículo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- Placa -->
+    <EditText
+        android:id="@+id/etPlaca"
+        android:hint="Placa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- CheckBox para seleccionar tipo de vehículo -->
+    <CheckBox
+        android:id="@+id/cbAutomovil"
+        android:text="Automóvil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <CheckBox
+        android:id="@+id/cbMoto"
+        android:text="Moto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Botón para registrar -->
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:text="Registrar Alumno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
