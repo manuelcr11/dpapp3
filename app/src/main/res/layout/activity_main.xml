@@ -1,126 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <!-- Matrícula -->
+    <EditText
+        android:id="@+id/etMatricula"
+        android:hint="Matrícula (ID)"
+        android:inputType="text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/txtId"
-            android:hint="ID"
-            android:inputType="number"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <!-- Nombre -->
+    <EditText
+        android:id="@+id/etNombre"
+        android:hint="Nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/txtNombre"
-            android:hint="Nombre del alumno"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <!-- Apellido Paterno -->
+    <EditText
+        android:id="@+id/etApellidoPaterno"
+        android:hint="Apellido Paterno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/txtMatricula"
-            android:hint="Matrícula"
-            android:inputType="number"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <!-- Apellido Materno -->
+    <EditText
+        android:id="@+id/etApellidoMaterno"
+        android:hint="Apellido Materno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/txtTipo"
-            android:hint="Tipo de vehículo"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <!-- Modelo del vehículo -->
+    <EditText
+        android:id="@+id/etModelo"
+        android:hint="Modelo del vehículo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/txtMarca"
-            android:hint="Marca"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <!-- Placa -->
+    <EditText
+        android:id="@+id/etPlaca"
+        android:hint="Placa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/txtPlaca"
-            android:hint="Placa"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <!-- CheckBox para seleccionar tipo de vehículo -->
+    <CheckBox
+        android:id="@+id/cbAutomovil"
+        android:text="Automóvil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <CheckBox
+        android:id="@+id/cbMoto"
+        android:text="Moto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-            <Button
-                android:id="@+id/btnAgregar"
-                android:text="Agregar"
-                android:layout_weight="1"
-                android:backgroundTint="@color/green_400"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/btnMostrar"
-                android:text="Mostrar"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/btnActualizar"
-                android:text="Actualizar"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/btnEliminar"
-                android:text="Eliminar"
-                android:layout_weight="1"
-                android:backgroundTint="@color/red_400"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnMapa"
-            android:text="Abrir Mapa"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/blue_400"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/txtLista"
-            android:padding="20dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-</ScrollView>
+    <!-- Botón para registrar -->
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:text="Registrar Alumno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>vvvvv
